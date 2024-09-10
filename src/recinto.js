@@ -7,15 +7,10 @@ export class Recinto {
   }
 
   adicionarAnimal(animal, quantidade) {
-    if (quantidade <= 0) {
-      return "Quantidade inválida";
-    }
   }
 
-  retornaErro(erro) {
-    return {
-      erro: erro,
-    };
+  toString() {
+    return "";
   }
 }
 

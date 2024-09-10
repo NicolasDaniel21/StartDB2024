@@ -2,7 +2,11 @@ import { RecintosZoo } from "./recintos-zoo.js";
 
 function main() {
   let recintos = new RecintosZoo();
-  recintos.analisaRecintos("macaco", -1);
+  const resultado = recintos.analisaRecintos("MACACO", 1);
+
+  console.log("recintosViaveis: " + resultado.recintosViaveis);
+  console.log("erro: " + resultado.erro);
 }
+
 
 main();
