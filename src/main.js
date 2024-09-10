@@ -8,5 +8,4 @@ function main() {
   console.log("erro: " + resultado.erro);
 }
 
-
 main();

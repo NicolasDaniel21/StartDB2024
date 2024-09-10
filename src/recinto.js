@@ -8,10 +8,6 @@ export class Recinto {
 
   adicionarAnimal(animal, quantidade) {
   }
-
-  toString() {
-    return "";
-  }
 }
 
 /*

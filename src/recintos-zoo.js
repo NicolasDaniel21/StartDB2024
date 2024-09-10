@@ -46,6 +46,7 @@ export class RecintosZoo {
 
   analisaRecintos(animal, quantidade) {
     let recintosViaveis = [];
+    let erro;
 
     if (quantidade <= 0) {
       return {
@@ -54,23 +55,24 @@ export class RecintosZoo {
       };
     }
 
-    process.stdout.write("O animal \"" + animal);
-    if (Object.keys(RecintosZoo.animais).includes(animal)) {
-        console.log("\" EXISTE");
-    } else {
-        console.log("\" NÃO EXISTE");
+    if (!Object.keys(RecintosZoo.animais).includes(animal)) {
+      return {
+        erro: "Animal inválido",
+        recintosViaveis,
+      };
     }
 
     this.recintos.forEach((recinto) => {
-      if (recinto.adicionarAnimal(animal, quantidade)) {
-        console.log("true");
-        console.log(recinto.erro);
-        console.log("---");
-      } else {
-        console.log("false");
-        console.log(recinto.erro);
-        console.log("---");
-      }
+
+        let biomasAnimal = RecintosZoo.animais[animal].bioma;
+
+        biomasAnimal.forEach((biomaAnimal) => {
+            if(recinto.bioma == biomaAnimal) {
+                console.log("bioma " + recinto.bioma + " compativel com " + biomaAnimal);
+            }
+        });
     });
+
+    return { erro, recintosViaveis };
   }
 }
