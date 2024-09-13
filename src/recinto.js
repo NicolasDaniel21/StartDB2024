@@ -1,16 +1,56 @@
+import { AnimaisEnum } from './animaisEnum.js';
 export class Recinto {
   constructor(numero, tamanhoTotal, ...bioma) {
     this.numero = numero;
     this.bioma = bioma;
     this.tamanhoTotal = tamanhoTotal;
-    this.animais = {};
+    this.animais = [];
   }
 
-  adicionarAnimal(animal, quantidade) {
+  get getAnimais() {
+    return this.animais;
+  }
+
+  get getBioma() {
+    return this.bioma;
+  }
+
+  adicionarAnimal (animal) {
+    this.animais.push(animal);
+  }
+
+  calculaEspacoLivre () {
+    let espacoOcupado = 0;
+    this.animais.forEach((animal) => {
+      espacoOcupado = espacoOcupado + AnimaisEnum.animais[animal].tamanho;
+    })
+
+    const temValorDiferente = new Set(this.animais).size > 1;
+
+    if(temValorDiferente)
+      espacoOcupado++;
+
+    return (this.tamanhoTotal - espacoOcupado);
+  }
+
+  temAnimaisDiferentes (animal) {
+    for (let animalAtual of this.animais) {
+      if(animalAtual != animal) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  toString() {
+    return `Recinto ${this.numero} (espaço livre: ${this.calculaEspacoLivre()} total: ${this.tamanhoTotal})`;
   }
 }
 
 /*
+carnívoros: leão, leopardo, crocodilo
+
 1. bioma certo, espaço suficiente
 2. carnívoros só podem conviver com carnívoros
 3. animais já presentes devem continuar confortáveis com inclusões
